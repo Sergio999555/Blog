@@ -1,24 +1,30 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Header } from "../Header/Header";
-import { ArticleList } from "../ArticleList/ArticleList";
-import { Article } from "../Article/Article";
-import { NotFound } from "../../NotFound/NotFound";
-import "antd/dist/antd.min.css";
+import React, { FC } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { Header } from "../Header";
+import { ArticlesList } from "../ArticlesList";
+import { ArticleFull } from "../ArticlesFull";
+import { NotFound } from "../NotFound";
+import { SignIn } from "../SignIn";
+import { SignUp } from "../SignUp";
 import "../App/App.scss";
+import "antd/dist/antd.css";
 
-export const App = () => {
+const App: FC = () => {
   return (
-    <Router>
+    <>
       <Header />
-      <div className="main">
+      <main className="main">
         <Routes>
-          <Route path="/" element={<ArticleList />} />
-          <Route path="/articles" element={<ArticleList />} />
-          <Route path="/articles/:id" element={<Article />} />
+          <Route path="/" element={<Navigate to="/articles" />} />
+          <Route path="/articles/" element={<ArticlesList />} />
+          <Route path="/articles/:id" element={<ArticleFull />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
-    </Router>
+      </main>
+    </>
   );
 };
+
+export default App;

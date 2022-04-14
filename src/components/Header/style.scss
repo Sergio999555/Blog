@@ -17,7 +17,6 @@
 
   &__title:hover {
     color: #1890ff;
-    transition: 0.5s;
   }
 
   &__button-item {
@@ -26,14 +25,14 @@
     font-size: 18px;
     line-height: 28px;
     padding: 6px 18px;
-
+    color: rgba(0, 0, 0, 0.85);
     border: 1px solid #fff;
   }
 
-  &__button-item:hover {
+  &__button-item:hover,
+  &__button-item:focus {
     border: 1px solid #52c41a;
     border-radius: 5px;
     color: #52c41a;
-    transition: 0.5s;
   }
 }

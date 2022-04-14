@@ -1,19 +1,26 @@
-import axios from "axios";
+import { IArticle, IArticles } from "../types";
 
-const baseUrl = "https://kata.academy:8021/api/";
+interface IProps {
+  article: IArticle;
+}
 
-const getArticles = async (offset = 0) => {
-  const { data } = await axios.get(
-    `${baseUrl}articles?limit=5&offset=${offset}`
+const baseUrl = "https://kata.academy:8021/api";
+
+export const getArticles = async (currentPage: number): Promise<IArticles> => {
+  const OffSetPage = (currentPage - 1) * 5;
+  const result = await fetch(
+    `${baseUrl}/articles?offset=${OffSetPage}&limit=5`
   );
-  console.log(data);
-  return data;
+
+  if (!result.ok) throw new Error("Could not get data");
+  return result.json();
 };
 
-const getArticle = async (id: number) => {
-  const { data } = await axios.get(`${baseUrl}articles/${id}`);
-  console.log(data);
-  return data;
+export const getArticle = async (id: string): Promise<IProps> => {
+  const result = await fetch(`${baseUrl}/articles/${id}`);
+  if (!result.ok)
+    throw new Error(
+      `https://kata.academy:8021/api/articles/${id} , received ${result.status}`
+    );
+  return result.json();
 };
-
-export { getArticles, getArticle };
