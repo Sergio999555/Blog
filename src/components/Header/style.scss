@@ -13,10 +13,16 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
   }
 
   &__title:hover {
     color: #1890ff;
+  }
+
+  &__button {
+    display: flex;
+    align-items: baseline;
   }
 
   &__button-item {
@@ -34,5 +40,33 @@
     border: 1px solid #52c41a;
     border-radius: 5px;
     color: #52c41a;
+    transition: 0.5s;
+  }
+
+  &__profile {
+    display: flex;
+    justify-content: baseline;
+  }
+
+  &__profile-image {
+    width: 46px;
+    height: 46px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-right: 24px;
+    margin-left: 24px;
+  }
+
+  &__profile-name:hover {
+    color: #1890ff;
+  }
+
+  &__profile-name {
+    font-family: "Inter-Medium", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    padding: 6px 18px;
+    color: rgba(0, 0, 0, 0.85);
   }
 }

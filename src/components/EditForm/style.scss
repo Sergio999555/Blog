@@ -1,6 +1,6 @@
-.registerForm {
+.editForm {
   width: 384px;
-  height: 599px;
+  height: 547px;
   margin: 0 auto;
   margin-top: 54px;
   background-color: #fff;
@@ -23,39 +23,17 @@
     color: #262626;
   }
 
-  &__input {
-    width: 320px;
-    height: 40px;
-    border: 1px solid #d9d9d9;
-    border-radius: 6px;
-    padding-left: 12px;
-    margin-left: 32px;
-    margin-bottom: 16px;
-  }
-
   &__button {
     width: 320px;
     height: 40px;
     background-color: #1890ff;
     color: #fff;
     margin-left: 32px;
-    margin-top: 24px;
     border-radius: 6px;
   }
 
   &__button:hover {
     opacity: 0.7;
     transition: 0.5s;
-  }
-
-  &__checkbox {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
-  }
-
-  &__footer {
-    margin-top: 8px;
-    text-align: center;
   }
 }
