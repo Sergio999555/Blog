@@ -4,28 +4,30 @@ import { useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
 import { connect, ConnectedProps } from "react-redux";
 import Checkbox from "antd/lib/checkbox/Checkbox";
+
 import * as actions from "../../store/actions";
 import InputForm from "../InputForm";
 import {
-  FormDataSignUp,
-  RegistrationBody,
-  ErrorResponse,
+  IFormDataSignUp,
+  IRegistrationBody,
+  IErrorResponse,
   ErrorResponseKey,
-  InputProps,
-  State,
+  IInputProps,
+  IState,
 } from "../../types";
 import { InputFormSignUpProps } from "../../config";
 import { registrationRequest } from "../../services/blogApi";
+
 import "../SignUp/style.scss";
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: IState) => {
   const { user } = state;
   return { user };
 };
 
 const responseErrorSearch = (
-  errorObj: ErrorResponse,
-  props: InputProps
+  errorObj: IErrorResponse,
+  props: IInputProps
 ): string | undefined => {
   if (errorObj.errors) {
     const errkeys = Object.keys(errorObj.errors);
@@ -42,32 +44,31 @@ const connector = connect(mapStateToProps, actions);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const SignUp: FC<PropsFromRedux> = ({ setUserAction }) => {
-  const [cookies, setCookies] = useCookies(["token"]);
-  const [responseErrorObj, setResponseError] = useState<ErrorResponse>({});
+  const [cookies, setCookie] = useCookies(["token"]);
+  const [responseErrorObj, setResponseError] = useState<IErrorResponse>({});
+  const [agree, setAgree] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormDataSignUp>({ mode: "onChange" });
-  const [agree, setAgree] = useState(false);
-  const navigate = useNavigate();
+  } = useForm<IFormDataSignUp>({ mode: "onChange" });
 
   if (cookies.token !== undefined) navigate("/");
 
-  const onSubmit = (data: FormDataSignUp) => {
+  const onSubmit = (data: IFormDataSignUp) => {
     if (!agree) return;
     const { username, email, password } = data;
-    const body: RegistrationBody = {
+    const body: IRegistrationBody = {
       user: { username, email, password },
     };
     registrationRequest(body)
       .then((value) => {
         if (value.errors) {
-          const responseError = value;
-          setResponseError(responseError);
+          setResponseError(value);
         }
         const { token } = value.user;
-        setCookies("token", token);
+        setCookie("token", token);
         setUserAction(value.user);
         navigate("/");
       })

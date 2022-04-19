@@ -1,13 +1,13 @@
-import { State, Actions, ActionSetUser } from "../types";
+import { IState, Actions, IActionSetUser } from "../types";
 
-const initialState: State = {
+const initialState: IState = {
   user: null,
 };
 
-export default function reducer(
-  state: State = initialState,
-  action: ActionSetUser
-): State {
+export const reducer = (
+  state: IState = initialState,
+  action: IActionSetUser
+): IState => {
   switch (action.type) {
     case Actions.setUser: {
       const user = action.payload;
@@ -19,4 +19,4 @@ export default function reducer(
     default:
       return state;
   }
-}
+};

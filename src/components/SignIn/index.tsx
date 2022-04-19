@@ -3,14 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
+
 import InputForm from "../InputForm";
-import { FormDataSignIn, State, AuthenticationBody } from "../../types";
+import { IFormDataSignIn, IState, IAuthenticationBody } from "../../types";
 import { InputFormSignInProps } from "../../config";
 import * as actions from "../../store/actions";
 import { authenticationRequest } from "../../services/blogApi";
+
 import "../SignIn/style.scss";
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: IState) => {
   const { user } = state;
   return { user };
 };
@@ -25,16 +27,16 @@ const SignIn: FC<PropsFromRedux> = ({ setUserAction }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormDataSignIn>({ mode: "onChange" });
-  const [cookies, setCookies] = useCookies(["token"]);
+  } = useForm<IFormDataSignIn>({ mode: "onChange" });
+  const [cookies, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
   if (cookies.token !== undefined) navigate("/");
 
-  const onSubmit = (data: FormDataSignIn) => {
+  const onSubmit = (data: IFormDataSignIn) => {
     setResponseError(false);
     const { email, password } = data;
-    const body: AuthenticationBody = {
+    const body: IAuthenticationBody = {
       user: { email, password },
     };
     authenticationRequest(body)
@@ -42,7 +44,7 @@ const SignIn: FC<PropsFromRedux> = ({ setUserAction }) => {
         if (value.errors) setResponseError(true);
 
         const { token } = value.user;
-        setCookies("token", token);
+        setCookie("token", token);
         setUserAction(value.user);
         setResponseError(false);
         navigate("/");
@@ -82,4 +84,5 @@ const SignIn: FC<PropsFromRedux> = ({ setUserAction }) => {
   );
 };
 
+export const OnSubmittt = connector(SignIn);
 export default connector(SignIn);

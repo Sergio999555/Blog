@@ -2,27 +2,28 @@ import React, { useEffect, FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 import { useCookies } from "react-cookie";
-import { State } from "../../types";
+
+import { IState } from "../../types";
 import * as actions from "../../store/actions";
 import { getUser } from "../../services/blogApi";
+
 import "../Header/style.scss";
 
-function mapStateToProps(state: State) {
+const mapStateToProps = (state: IState) => {
   const { user } = state;
   return { user };
-}
+};
 
-const mapDispatch = actions;
-const connector = connect(mapStateToProps, mapDispatch);
+const connector = connect(mapStateToProps, actions);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const Header: FC<PropsFromRedux> = ({ user, setUserAction }) => {
-  const [cookies, setCookies] = useCookies(["token"]);
+  const [cookies, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
   const logOut = () => {
-    setCookies("token", "", { maxAge: -1 });
+    setCookie("token", "", { maxAge: -1 });
     setUserAction(null);
     navigate("/");
   };
@@ -44,10 +45,8 @@ const Header: FC<PropsFromRedux> = ({ user, setUserAction }) => {
 
       return (
         <div className="header__button">
-          <Link to="/new-article">
-            <button type="button" className="header__button-item">
-              Create Article
-            </button>
+          <Link to="/new-article" className="header__button-item">
+            Create Article
           </Link>
           <Link to="/profile">
             <div className="header__profile">

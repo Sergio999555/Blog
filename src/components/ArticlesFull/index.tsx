@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { getArticle } from "../../services/blogApi";
 import { IArticle } from "../../types";
 import { Article } from "../Article";
@@ -24,13 +25,13 @@ export const ArticleFull: FC = () => {
       });
   }, [id]);
 
-  const content = article ? <Article {...(article as IArticle)} full /> : null;
+  const content = article && <Article {...(article as IArticle)} full />;
 
   return (
-    <div>
+    <>
       {loading && !error ? <Loader /> : null}
       {error ? <Error /> : null}
       {content}
-    </div>
+    </>
   );
 };
