@@ -20,10 +20,7 @@ import { registrationRequest } from "../../services/blogApi";
 
 import "../SignUp/style.scss";
 
-const mapStateToProps = (state: IState) => {
-  const { user } = state;
-  return { user };
-};
+
 
 const responseErrorSearch = (
   errorObj: IErrorResponse,
@@ -38,10 +35,6 @@ const responseErrorSearch = (
   }
   return undefined;
 };
-
-const connector = connect(mapStateToProps, actions);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const SignUp: FC<PropsFromRedux> = ({ setUserAction }) => {
   const [cookies, setCookie] = useCookies(["token"]);
@@ -111,4 +104,15 @@ const SignUp: FC<PropsFromRedux> = ({ setUserAction }) => {
   );
 };
 
-export default connector(SignUp);
+const mapStateToProps = (state: IState) => {
+    const { user } = state;
+    return { user };
+};
+
+const connector = connect(mapStateToProps, actions);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const SignUpWithConnector = connector(SignUp);
+
+export { SignUpWithConnector as SignUp };

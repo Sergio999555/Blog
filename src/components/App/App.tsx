@@ -5,8 +5,8 @@ import Header from "../Header";
 import { ArticlesList } from "../ArticlesList";
 import { ArticleFull } from "../ArticlesFull";
 import { NotFound } from "../NotFound";
-import SignIn from "../SignIn";
-import SignUp from "../SignUp";
+import { SignIn } from "../SignIn";
+import { SignUp } from "../SignUp";
 import ProfileEditForm from "../EditForm";
 import FormAddArticle from "../FormArticle";
 
