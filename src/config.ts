@@ -1,4 +1,5 @@
 import { InputPropsWithoutErrors } from "./types";
+import { v4 as uuid } from "uuid";
 
 export const InputFormSignUpProps: InputPropsWithoutErrors[] = [
   {
@@ -143,3 +144,58 @@ export const InputFormEditProps: InputPropsWithoutErrors[] = [
     },
   },
 ];
+
+export const InputFormCreateArticleProps: InputPropsWithoutErrors[] = [
+  {
+    name: "title",
+    label: "Title",
+    type: "text",
+    placeholder: "Title",
+    id: uuid(),
+    errorMessage: "should not be empty",
+    responseError: null,
+    rules: {
+      required: true,
+      minLength: 1,
+    },
+  },
+  {
+    name: "description",
+    label: "Short description",
+    type: "text",
+    id: uuid(),
+    placeholder: "Title",
+    errorMessage: "should not be empty",
+    responseError: null,
+    rules: {
+      required: true,
+      minLength: 1,
+    },
+  },
+  {
+    name: "body",
+    label: "Text",
+    type: "text",
+    placeholder: "Text",
+    textarea: true,
+    id: uuid(),
+    errorMessage: "should not be empty",
+    responseError: null,
+    rules: {
+      required: true,
+      minLength: 1,
+    },
+  },
+];
+
+export const InputFormTag: InputPropsWithoutErrors = {
+  name: "tag",
+  type: "text",
+  placeholder: "Tag",
+  errorMessage: "should not be empty",
+  responseError: null,
+  rules: {
+    required: true,
+    minLength: 1,
+  },
+};

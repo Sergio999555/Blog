@@ -1,10 +1,12 @@
 import React from "react";
-import { InputProps } from "../../types";
+
+import { IInputProps } from "../../types";
+
 import "../InputForm/style.scss";
 
 const InputForm = React.forwardRef<
   HTMLInputElement & HTMLTextAreaElement,
-  InputProps
+  IInputProps
 >((props, ref) => {
   const {
     label,

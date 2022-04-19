@@ -1,12 +1,12 @@
 import {
   IArticle,
   IArticles,
-  RegistrationBody,
-  UserResponse,
-  ErrorResponse,
-  AuthenticationBody,
-  EditBody,
-  ArticleFormBody,
+  IRegistrationBody,
+  IUserResponse,
+  IErrorResponse,
+  IAuthenticationBody,
+  IEditBody,
+  IArticleFormBody,
 } from "../types";
 
 interface IProps {
@@ -35,8 +35,8 @@ export const getArticle = async (id: string): Promise<IProps> => {
 };
 
 export const registrationRequest = async (
-  body: RegistrationBody
-): Promise<UserResponse & ErrorResponse> => {
+  body: IRegistrationBody
+): Promise<IUserResponse & IErrorResponse> => {
   const response = await fetch(`${baseUrl}/users`, {
     method: "POST",
     headers: {
@@ -48,8 +48,8 @@ export const registrationRequest = async (
 };
 
 export const authenticationRequest = async (
-  body: AuthenticationBody
-): Promise<UserResponse & ErrorResponse> => {
+  body: IAuthenticationBody
+): Promise<IUserResponse & IErrorResponse> => {
   const response = await fetch(`${baseUrl}/users/login`, {
     method: "POST",
     headers: {
@@ -61,9 +61,9 @@ export const authenticationRequest = async (
 };
 
 export const createArticleRequest = async (
-  body: ArticleFormBody,
+  body: IArticleFormBody,
   token: string
-): Promise<ArticleFormBody & ErrorResponse> => {
+): Promise<IArticleFormBody & IErrorResponse> => {
   const response = await fetch(`${baseUrl}/articles`, {
     method: "POST",
     headers: {
@@ -76,10 +76,10 @@ export const createArticleRequest = async (
 };
 
 export const updateArticleRequest = async (
-  body: ArticleFormBody,
+  body: IArticleFormBody,
   token: string,
   slug: string
-): Promise<ArticleFormBody & ErrorResponse> => {
+): Promise<IArticleFormBody & IErrorResponse> => {
   const response = await fetch(`${baseUrl}/articles/${slug}`, {
     method: "PUT",
     headers: {
@@ -94,7 +94,7 @@ export const updateArticleRequest = async (
 export const deleteArticleRequest = async (
   slug: string,
   token: string
-): Promise<IProps & ErrorResponse> => {
+): Promise<IProps & IErrorResponse> => {
   const response = await fetch(`${baseUrl}/articles/${slug}`, {
     method: "DELETE",
     headers: {
@@ -105,7 +105,7 @@ export const deleteArticleRequest = async (
   return response.json();
 };
 
-export const getUser = async (token: string): Promise<UserResponse> => {
+export const getUser = async (token: string): Promise<IUserResponse> => {
   const response = await fetch(`${baseUrl}/user`, {
     method: "GET",
     headers: {
@@ -121,9 +121,9 @@ export const getUser = async (token: string): Promise<UserResponse> => {
 };
 
 export const editProfileRequest = async (
-  body: EditBody,
+  body: IEditBody,
   token: string
-): Promise<UserResponse & ErrorResponse> => {
+): Promise<IUserResponse & IErrorResponse> => {
   const response = await fetch(`${baseUrl}/user`, {
     method: "PUT",
     headers: {

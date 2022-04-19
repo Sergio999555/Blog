@@ -1,5 +1,4 @@
 .article {
-  margin-top: 26px;
   background-color: #fff;
   padding: 16px;
   border-radius: 5px;
@@ -11,14 +10,14 @@
     justify-content: space-between;
   }
 
-  &__header-left {
+  &__header--left {
     display: flex;
     flex-wrap: wrap;
     width: 682px;
     align-items: baseline;
   }
 
-  &__header-right {
+  &__header--right {
     display: flex;
     align-items: center;
   }

@@ -31,21 +31,21 @@ export interface ISubmitUser {
   avatar?: string;
 }
 
-export type ErrorState = {
+export interface IErrorState {
   hasError: boolean;
-};
+}
 
 export enum Actions {
   getArticles = "GET_ARTICLES",
   setUser = "SET_USER",
 }
 
-export type ActionSetUser = {
+export interface IActionSetUser {
   type: Actions.setUser;
-  payload: User | null;
-};
+  payload: IUser | null;
+}
 
-export type User = {
+export interface IUser {
   [key: string]: any;
   email: string;
   token: string;
@@ -55,13 +55,13 @@ export type User = {
   id: number;
   createdAt: string;
   updatedAt: string;
-};
+}
 
-export type State = {
-  user: User | null;
-};
+export interface IState {
+  user: IUser | null;
+}
 
-export type InputProps = {
+export interface IInputProps {
   label?: string;
   name: string;
   value?: string;
@@ -86,81 +86,80 @@ export type InputProps = {
     minLength?: ValidationRule<number>;
     maxLength?: ValidationRule<number>;
   };
-};
+}
 
-export type InputPropsWithoutErrors = Omit<InputProps, "errors">;
-
-export type FormDataSignIn = {
+export interface IFormDataSignIn {
   email: string;
   password: string;
-};
+}
 
-export type FormDataSignUp = {
+export interface IFormDataSignUp {
   username: string;
   email: string;
   password: string;
   repeatPassword: string;
-};
+}
 
-export type FormDataEdit = {
+export interface IFormDataEdit {
   username: string;
   email: string;
   password: string;
   image: string;
-};
+}
 
-export type FormDataArticle = {
+export interface IFormDataArticle {
   title: string;
   description: string;
   body: string;
-};
+}
 
-export type FormatDataTags = {
+export interface IFormatDataTags {
   tag: string;
-};
+}
 
-export type EditBody = {
+export interface IEditBody {
   user: {
     username: string;
     email: string;
     password: string;
     image: string;
   };
-};
+}
 
-export type RegistrationBody = {
+export interface IRegistrationBody {
   user: {
     username: string;
     email: string;
     password: string;
   };
-};
+}
 
-export type AuthenticationBody = {
+export interface IAuthenticationBody {
   user: {
     email: string;
     password: string;
   };
-};
+}
 
-export type ArticleFormBody = {
+export interface IArticleFormBody {
   article: {
     title: string;
     description: string;
     body: string;
     tagList?: string[];
   };
-};
+}
 
-export type UserResponse = {
-  user: User;
-};
+export interface IUserResponse {
+  user: IUser;
+}
 
-export type ErrorResponse = {
+export interface IErrorResponse {
   errors?: {
     email?: string[];
     username?: string[];
   };
-};
+}
 
+export type InputPropsWithoutErrors = Omit<IInputProps, "errors">;
 export type ErrorResponseKey = "email" | "username";

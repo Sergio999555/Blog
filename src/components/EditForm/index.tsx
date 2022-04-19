@@ -3,23 +3,25 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { connect, ConnectedProps } from "react-redux";
+
 import { InputFormEditProps } from "../../config";
 import {
-  EditBody,
-  ErrorResponse,
-  InputProps,
+  IEditBody,
+  IErrorResponse,
+  IInputProps,
   ErrorResponseKey,
-  State,
-  FormDataEdit,
+  IState,
+  IFormDataEdit,
 } from "../../types";
 import { editProfileRequest } from "../../services/blogApi";
 import InputForm from "../InputForm";
 import * as actions from "../../store/actions";
+
 import "../EditForm/style.scss";
 
 const responseErrorSearch = (
-  errorObj: ErrorResponse,
-  props: InputProps
+  errorObj: IErrorResponse,
+  props: IInputProps
 ): string | undefined => {
   if (errorObj.errors) {
     const errkeys = Object.keys(errorObj.errors);
@@ -31,38 +33,28 @@ const responseErrorSearch = (
   return undefined;
 };
 
-const mapStateToProps = (state: State) => {
-  const { user } = state;
-  return { user };
-};
-
-const connector = connect(mapStateToProps, actions);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
 const ProfileEditForm: FC<PropsFromRedux> = ({ user, setUserAction }) => {
-  const [responseErrorObj, setResponseError] = useState<ErrorResponse>({});
+  const [responseErrorObj, setResponseError] = useState<IErrorResponse>({});
   const [cookies, setCookies] = useCookies(["token"]);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormDataEdit>({ mode: "onChange" });
+  } = useForm<IFormDataEdit>({ mode: "onChange" });
 
   if (cookies.token === undefined) navigate("sign-in");
 
-  const onSubmit = (data: FormDataEdit) => {
+  const onSubmit = (data: IFormDataEdit) => {
     const { email, password, image, username } = data;
-    const body: EditBody = {
+    const body: IEditBody = {
       user: { email, password, image, username },
     };
 
     editProfileRequest(body, cookies.token)
       .then((value) => {
         if (value.errors) {
-          const responseError = value;
-          setResponseError(responseError);
+          setResponseError(value);
         }
         const { token } = value.user;
         setCookies("token", token);
@@ -104,5 +96,14 @@ const ProfileEditForm: FC<PropsFromRedux> = ({ user, setUserAction }) => {
     </div>
   );
 };
+
+const mapStateToProps = (state: IState) => {
+  const { user } = state;
+  return { user };
+};
+
+const connector = connect(mapStateToProps, actions);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export default connector(ProfileEditForm);

@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import { Pagination } from "antd";
+
 import { Error } from "../Error";
 import { Article } from "../Article";
 import { getArticles } from "../../services/blogApi";
 import { IArticles } from "../../types";
 import { Loader } from "../Loader";
+
 import "../ArticlesList/style.scss";
 
 export const ArticlesList: FC = () => {
@@ -22,7 +24,6 @@ export const ArticlesList: FC = () => {
       .then((value) => {
         setLoading(false);
         setArticlesObj(value);
-        console.log(value);
       })
       .catch((err) => {
         setError(true);
@@ -33,10 +34,9 @@ export const ArticlesList: FC = () => {
   if (articlesObj) {
     const { articles, articlesCount } = articlesObj;
     pages = articlesCount;
-    content = articles.map((article) => {
-      const key = article.slug;
-      return <Article key={key} {...article} />;
-    });
+    content = articles.map((article) => (
+      <Article key={article.slug} {...article} />
+    ));
   }
 
   const onChangePage = (page: number) => {
@@ -46,7 +46,7 @@ export const ArticlesList: FC = () => {
   return (
     <>
       {loading && !error ? <Loader /> : content}
-      {error ? <Error /> : null}
+      {error && <Error />}
       <Pagination
         size="small"
         showSizeChanger={false}
