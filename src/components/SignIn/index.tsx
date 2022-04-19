@@ -12,15 +12,6 @@ import { authenticationRequest } from "../../services/blogApi";
 
 import "../SignIn/style.scss";
 
-const mapStateToProps = (state: IState) => {
-  const { user } = state;
-  return { user };
-};
-
-const connector = connect(mapStateToProps, actions);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
 const SignIn: FC<PropsFromRedux> = ({ setUserAction }) => {
   const [responseError, setResponseError] = useState(false);
   const {
@@ -84,5 +75,15 @@ const SignIn: FC<PropsFromRedux> = ({ setUserAction }) => {
   );
 };
 
-export const OnSubmittt = connector(SignIn);
-export default connector(SignIn);
+const mapStateToProps = (state: IState) => {
+  const { user } = state;
+  return { user };
+};
+
+const connector = connect(mapStateToProps, actions);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const SignInWithConnector = connector(SignIn);
+
+export { SignInWithConnector as SignIn };
