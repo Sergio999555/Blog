@@ -20,8 +20,6 @@ import { registrationRequest } from "../../services/blogApi";
 
 import "../SignUp/style.scss";
 
-
-
 const responseErrorSearch = (
   errorObj: IErrorResponse,
   props: IInputProps
@@ -105,8 +103,8 @@ const SignUp: FC<PropsFromRedux> = ({ setUserAction }) => {
 };
 
 const mapStateToProps = (state: IState) => {
-    const { user } = state;
-    return { user };
+  const { user } = state;
+  return { user };
 };
 
 const connector = connect(mapStateToProps, actions);

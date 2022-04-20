@@ -134,3 +134,30 @@ export const editProfileRequest = async (
   });
   return response.json();
 };
+
+export const addFavorite = async (
+  token: string,
+  slug: string
+): Promise<IProps & IErrorResponse> => {
+  const response = await fetch(`${baseUrl}/articles/${slug}/favorite`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      Authorization: `Token ${token}`,
+    },
+  });
+  return response.json();
+};
+
+export const deleteFavorite = async (
+  token: string,
+  slug: string
+): Promise<IProps & IErrorResponse> => {
+  const response = await fetch(`${baseUrl}/articles/${slug}/favorite`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+  return response.json();
+};

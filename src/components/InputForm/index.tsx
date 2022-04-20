@@ -20,7 +20,13 @@ const InputForm = React.forwardRef<
   } = props;
 
   const contentInput = textarea ? (
-    <textarea {...inputProps} id={id} name={name} ref={ref} />
+    <textarea
+      {...inputProps}
+      id={id}
+      name={name}
+      ref={ref}
+      className="textarea"
+    />
   ) : (
     <input {...inputProps} id={id} name={name} ref={ref} className="input" />
   );

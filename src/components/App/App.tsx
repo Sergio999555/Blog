@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
 
-import Header from "../Header";
+import { Header } from "../Header";
 import { ArticlesList } from "../ArticlesList";
 import { ArticleFull } from "../ArticlesFull";
 import { NotFound } from "../NotFound";
 import { SignIn } from "../SignIn";
 import { SignUp } from "../SignUp";
-import ProfileEditForm from "../EditForm";
-import FormAddArticle from "../FormArticle";
+import { ProfileEditForm } from "../EditForm";
+import { FormAddArticle } from "../FormArticle";
 
 import "../App/App.scss";
 import "antd/dist/antd.css";
@@ -22,6 +22,7 @@ export const App: FC = () => {
           <Route path="/" element={<Navigate to="/articles" />} />
           <Route path="/articles/" element={<ArticlesList />} />
           <Route path="/articles/:id" element={<ArticleFull />} />
+          <Route path="/articles/:id/edit" element={<FormAddArticle />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/profile" element={<ProfileEditForm />} />

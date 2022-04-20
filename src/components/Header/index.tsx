@@ -9,15 +9,6 @@ import { getUser } from "../../services/blogApi";
 
 import "../Header/style.scss";
 
-const mapStateToProps = (state: IState) => {
-  const { user } = state;
-  return { user };
-};
-
-const connector = connect(mapStateToProps, actions);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
 const Header: FC<PropsFromRedux> = ({ user, setUserAction }) => {
   const [cookies, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
@@ -93,4 +84,15 @@ const Header: FC<PropsFromRedux> = ({ user, setUserAction }) => {
   );
 };
 
-export default connector(Header);
+const mapStateToProps = (state: IState) => {
+  const { user } = state;
+  return { user };
+};
+
+const connector = connect(mapStateToProps, actions);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const headerWithConnector = connector(Header);
+
+export { headerWithConnector as Header };

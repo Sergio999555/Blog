@@ -106,4 +106,6 @@ const connector = connect(mapStateToProps, actions);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(ProfileEditForm);
+const ProfileEditFormWithConnector = connector(ProfileEditForm);
+
+export { ProfileEditFormWithConnector as ProfileEditForm };

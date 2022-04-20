@@ -66,7 +66,7 @@ export interface IInputProps {
   name: string;
   value?: string;
   type: string;
-  readonly?: boolean;
+  readOnly?: boolean;
   style?: {
     width?: string;
     nimHeight?: string;
