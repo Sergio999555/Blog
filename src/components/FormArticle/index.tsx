@@ -57,16 +57,17 @@ export const FormAddArticle: FC = () => {
 
     if (id && article) {
       updateArticleRequest(reqBody, cookies.token, article.slug)
-        .then(() => {
-          navigate("/articles");
+        .then((value) => {
+          navigate("/articles/");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      createArticleRequest(reqBody, cookies.token)
+        .then((value) => {
+          navigate("/articles/");
         })
         .catch((err) => console.log(err));
     }
-    createArticleRequest(reqBody, cookies.token)
-      .then(() => {
-        navigate("/articles");
-      })
-      .catch((err) => console.log(err));
   };
 
   type inputNames = "body" | "title" | "description";
@@ -89,7 +90,7 @@ export const FormAddArticle: FC = () => {
     <div key={item} className="tags">
       <InputForm value={item} type="text" name="" readOnly />
       <button
-        className="tags__button"
+        className="tags__button--del"
         onClick={() => setTagList(tagList.filter((tag) => tag !== item))}
       >
         Delete
@@ -104,11 +105,14 @@ export const FormAddArticle: FC = () => {
   ) : (
     <>
       <div className="formArticle">
+        <div>
+          <h2 className="formArticle__header"> {titleForm}</h2>
+        </div>
+
         <div className="formArticle__createArticle">
           <form onSubmit={handleSubmit(onSubmit)} className="form">
-            <h2 className="formArticle__header"> {titleForm}</h2>
             {contentInput}
-            <span className="formArticle__title">Tags</span>
+
             <button type="submit" className="formArticle__button">
               Send
             </button>
@@ -116,6 +120,7 @@ export const FormAddArticle: FC = () => {
         </div>
 
         <div className="tags">
+          <span className="formArticle__title">Tags</span>
           {addedTags}
           <FormAddTags
             onAdd={(value) =>

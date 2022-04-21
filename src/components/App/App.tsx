@@ -23,10 +23,10 @@ export const App: FC = () => {
           <Route path="/articles/" element={<ArticlesList />} />
           <Route path="/articles/:id" element={<ArticleFull />} />
           <Route path="/articles/:id/edit" element={<FormAddArticle />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/profile" element={<ProfileEditForm />} />
-          <Route path="/new-article" element={<FormAddArticle />} />
+          <Route path="/sign-in/" element={<SignIn />} />
+          <Route path="/sign-up/" element={<SignUp />} />
+          <Route path="/profile/" element={<ProfileEditForm />} />
+          <Route path="/new-article/" element={<FormAddArticle />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

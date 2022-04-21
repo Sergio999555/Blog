@@ -12,8 +12,8 @@ import { authenticationRequest } from "../../services/blogApi";
 
 import "../SignIn/style.scss";
 
-const SignIn: FC<PropsFromRedux> = ({ setUserAction }) => {
-  const [responseError, setResponseError] = useState(false);
+const SignIn: FC<PropsFromRedux> = () => {
+  const [responseError, setResponseError] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -33,12 +33,12 @@ const SignIn: FC<PropsFromRedux> = ({ setUserAction }) => {
     authenticationRequest(body)
       .then((value) => {
         if (value.errors) setResponseError(true);
-
-        const { token } = value.user;
-        setCookie("token", token);
-        setUserAction(value.user);
-        setResponseError(false);
-        navigate("/");
+        if (value.user) {
+          const { token } = value.user;
+          setCookie("token", token);
+          setResponseError(false);
+          navigate("/");
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -62,7 +62,11 @@ const SignIn: FC<PropsFromRedux> = ({ setUserAction }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="loginForm__header">Sign In</h2>
         {contentInput}
-        {responseError && <span>password or email is not correct</span>}
+        {responseError && (
+          <span className="loginForm__error">
+            Password or email is not correct
+          </span>
+        )}
         <button type="submit" className="loginForm__button">
           Login
         </button>

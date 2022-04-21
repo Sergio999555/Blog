@@ -53,13 +53,13 @@ const ProfileEditForm: FC<PropsFromRedux> = ({ user, setUserAction }) => {
 
     editProfileRequest(body, cookies.token)
       .then((value) => {
-        if (value.errors) {
-          setResponseError(value);
+        if (value.errors) setResponseError(value);
+        if (value.user) {
+          const { token } = value.user;
+          setCookies("token", token);
+          setUserAction(value.user);
+          navigate("/");
         }
-        const { token } = value.user;
-        setCookies("token", token);
-        setUserAction(value.user);
-        navigate("/");
       })
       .catch((err) => console.log(err));
   };

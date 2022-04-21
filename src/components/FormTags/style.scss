@@ -1,0 +1,14 @@
+.tags {
+  &__button--submit {
+    width: 160px;
+    height: 40px;
+    border: 1px solid #1890ff;
+    color: #1890ff;
+    margin-left: 32px;
+    border-radius: 6px;
+    &:hover {
+      opacity: 0.7;
+      transition: 0.5s;
+    }
+  }
+}

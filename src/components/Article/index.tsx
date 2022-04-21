@@ -14,6 +14,7 @@ import {
   deleteArticleRequest,
   addFavorite,
   deleteFavorite,
+  getArticles,
 } from "../../services/blogApi";
 
 const Article: FC<IArticle & PropsFromRedux> = ({
@@ -59,12 +60,10 @@ const Article: FC<IArticle & PropsFromRedux> = ({
       .catch((err) => console.log(err));
   };
 
-  const deleteArticle = () => {
-    deleteArticleRequest(slug, cookies.token)
-      .then(() => {
-        navigate("/articles");
-      })
-      .catch((err) => console.log(err));
+  const deleteArticle = async () => {
+    deleteArticleRequest(slug, cookies.token);
+    await getArticles(1);
+    navigate("/");
   };
 
   const modalDelete = isModalDelete && (

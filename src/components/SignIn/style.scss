@@ -36,6 +36,7 @@
   &__button {
     width: 320px;
     height: 40px;
+    margin-top: 8px;
     background-color: #1890ff;
     color: #fff;
     margin-left: 32px;
@@ -52,6 +53,12 @@
     margin-bottom: 48px;
     width: 319px;
     height: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__error {
+    color: red;
     display: flex;
     justify-content: center;
   }

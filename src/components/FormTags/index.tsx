@@ -5,6 +5,8 @@ import { IFormatDataTags } from "../../types";
 import { InputFormTag } from "../../config";
 import InputForm from "../InputForm";
 
+import "../FormTags/style.scss";
+
 export const FormAddTags: FC<{ onAdd: (value: string) => void }> = ({
   onAdd,
 }) => {
@@ -25,7 +27,9 @@ export const FormAddTags: FC<{ onAdd: (value: string) => void }> = ({
   return (
     <form onSubmit={handleSubmit(addTags)}>
       <InputForm {...propsInputTagWithError} {...register("tag")} />
-      {/* <button type="button">Add Tag</button> */}
+      <button type="submit" className="tags__button--submit">
+        Add Tag
+      </button>
     </form>
   );
 };
